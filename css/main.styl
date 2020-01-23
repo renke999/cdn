@@ -1,0 +1,445 @@
+// CSS Style Guide: http://codeguide.co/#css
+
+
+$scheme    = hexo-config('scheme') ? hexo-config('scheme') : 'Muse';
+
+$variables = base $scheme;
+$mixins    = base $scheme;
+
+
+// Variables Layer
+// --------------------------------------------------
+for $variable in $variables
+  @import "_variables/" + $variable;
+for $inject_variable in hexo-config('injects.variable')
+  @import $inject_variable;
+
+// Mixins Layer
+// --------------------------------------------------
+for $mixin in $mixins
+  @import "_mixins/" + $mixin;
+for $inject_mixin in hexo-config('injects.mixin')
+  @import $inject_mixin;
+
+// Common Layer
+// --------------------------------------------------
+
+// Scaffolding
+@import "_common/scaffolding";
+
+// Layout
+@import "_common/outline";
+
+// Components
+@import "_common/components";
+
+
+// Schemes Layer
+// --------------------------------------------------
+@import "_schemes/" + $scheme;
+
+
+// Custom Layer 此处很重要，做修改时都对应此处做，这里是自定义部分的修改
+// --------------------------------------------------
+for $inject_style in hexo-config('injects.style')
+  @import $inject_style;
+
+
+/*
+***
+  全局部分美化
+**
+*/
+
+body {
+//  background:url(https://source.unsplash.com/random/1600x900);
+//    background:url(/images/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position:50% 50%;
+    background:#FFFFFF;                    // 添加背景颜色
+}
+
+// 菜单栏
+.header-inner {
+  // box-shadow: 1px 1px 8px 2px rgba(179,22,132,0.15);
+  // border: solid #a166ab 2px;// 菜单栏
+  border-radius: 15px;
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1),
+    0 2px 4px 0px rgba(0,0,0,0.1);
+  margin-top: 10px;    // 露出全部
+  width: 270px !important;    // 自定义头像栏的宽度
+  background: rgba(255,255,255,0.5);                                                                                                                                         // 增加透明度
+}
+.header-inner:hover{
+  // box-shadow:1px 1px 8px 4px rgba(185,43,232,0.4);
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  box-shadow:0 2px 4px 0px rgba(0,0,0,0.1),
+    0 4px 8px 0px rgba(0,0,0,0.1),
+    0 8px 16px 0px rgba(0,0,0,0.1),
+    0 16px 32px 0px rgba(0,0,0,0.1) !important;
+}
+
+// 头像栏
+.sidebar-inner {
+  // border: solid wheat 2px
+  // box-shadow: 0 0 20px antiquewhite;
+  border-radius: 15px;
+  position: absolute;
+  overflow: hidden;
+  width: 270px;    // 自定义侧边栏的宽度
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1),
+    0 2px 4px 0px rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.5);                                                                                                                                         // 增加透明度
+}
+.sidebar-inner:hover{
+  // box-shadow: 1px 1px 8px 5px rgba(232,167,78,0.5);
+  color: antiquewhite
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  box-shadow:0 2px 4px 0px rgba(0,0,0,0.1),
+    0 4px 8px 0px rgba(0,0,0,0.1),
+    0 8px 16px 0px rgba(0,0,0,0.1),
+    0 16px 32px 0px rgba(0,0,0,0.1) !important;
+}
+
+// 主文章页面
+.post-block {                                                                                                                                                                                  // 主文章页面
+  border-radius: 15px !important;
+  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1), 0 2px 4px 0px rgba(0,0,0,0.1)     // 覆盖
+  margin-top: 10px;    // 露出全部
+  margin-bottom: 20px;
+  background: rgba(255,255,255,0.5);
+  // border: solid rgba(180,255,0,0.6) 2px;
+  padding: 30px 20px 20px 30px;    // 上右下左
+  background: rgba(255,255,255,0.5);    // 增加透明度
+}
+.post-block:hover{
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  box-shadow:0 2px 4px 0px rgba(0,0,0,0.1),
+    0 4px 8px 0px rgba(0,0,0,0.1),
+    0 8px 16px 0px rgba(0,0,0,0.1),
+    0 16px 32px 0px rgba(0,0,0,0.1) !important;
+
+}
+.post-block.home:hover{
+  transform: scale(1.02);
+}
+
+// 后面的文章
+#posts > article + article .post-block {                                                                                                                                           // 后面的文章
+  border-radius: 15px;
+  box-shadow: 1px 2px 8px 4px rgba(0,0,0,0.15);
+  //  background: rgba(255,255,255,.5);                                                                                                                                         // 增加透明度
+}
+
+
+// 页面分页
+.pagination {                                                                                                                                                                                   // 页面分页
+  border-radius: 15px;                                                                                                                                        // 扁平化,两边非对称
+  box-shadow: 1px 2px 8px 4px rgba(0,0,0,0.15);
+  //  background: rgba(255,255,255,.5);                                                                                                                                         // 增加透明度
+}
+.pagination:hover{
+  box-shadow:0 0px 30px rgba(0,0,0,0.8);
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+// 悬浮在头部菜单栏时显示白色
+.menu-item-active a, .menu .menu-item a:hover, .menu .menu-item span.exturl:hover {
+  background: #f9f9f99e;                                                                                                                                                             // 首页菜单选中后,变成淡白色.
+}
+
+// 设置内容区的宽度
+.content-wrap {
+  width: calc(100% - 300px);
+}
+@media (max-width: 767px) {
+  .content-wrap {
+    padding: $content-mobile-padding;
+    width: 100%;
+  }
+}
+
+// 标签的美化,使用圆形方框美化
+.tag-cloud a {
+  box-shadow: 0 1px 3px #6f42c1, 0 1px 2px #d9534f;
+  padding: 2px 10px;
+  margin: 8px;
+  background: #c1425c00;
+  border-bottom: none;
+  border-radius: 20px;
+}
+
+
+
+// 侧边栏个人信息
+.site-author-image{
+  max-width: 150px;
+  width: 135px;
+}
+
+
+
+
+
+
+// ************************************************************************************************
+// ************************************************************************************************
+// 以下代码是针对文章内容的控制       (美化,h2 h3标签,美化代码栏,一二级菜单美化等)
+// ************************************************************************************************
+// ************************************************************************************************
+
+
+
+.post-body {
+  color: #333;
+}
+
+// Code部分美化
+code {
+  padding: 2px 4px;
+  word-wrap: break-word;
+  color: #ff7600;
+  background: #fbf7f8;
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+// 下划线,美化
+hr {
+  background-color: #86dca3;
+}
+
+// 去掉图片的边框,显得更加自然
+.posts-expand .post-body img {
+  border: 1px #6f42c1;
+}
+
+
+
+
+// ************************************************************************************************
+// 其他美化代码(针对页面标题,文章标题,页面字体颜色,页面控件的美化)
+// ************************************************************************************************
+
+// 鼠标选择的段落变成黄色
+::selection {
+  background-color: #59ff83;
+  color: #555;
+}
+
+// 对页面文章的美化
+.posts-expand .home .post-title {
+  font-size: 1.2em;
+  text-align: left;
+  border-left: #7fb8ee 8px solid;
+  padding-left: 12px;
+}
+.post-title {
+  font-weight: 900!important;
+}
+.posts-expand .home .post-meta{
+  text-align: left;
+  margin: 8px 0 15px!important;
+}
+.post-button{
+  text-align: right;
+  margin-top: 0;
+}
+
+
+// 阅读全文按钮美化
+.btn {
+  padding: 3px 15px;
+  color: #34495e!important;
+  box-shadow: 0 0 0 1px #34495e;
+  border: 1px;
+  border-radius: 15px;
+  position: relative!important;
+  text-decoration: none!important;
+  transition: color .3s ease-in-out;
+  display: inline-block;
+  line-height: 2;
+}
+.btn:hover{
+  color: #fff!important
+  border-color: #222;
+  background: #34495e;
+}
+// 光标放到文章列表上面的时候,会变成彩色
+.posts-expand .post-title-link::before {
+  background-image: linear-gradient(90deg,#a166ab 0,#ef4e7b 25%,#f37055 50%,#ef4e7b 75%,#a166ab 100%);
+}
+
+
+// 文章分类页面中,标签的颜色属性.
+.category-list a{
+  color:#6f42c1;
+}
+
+
+p {
+  margin: 0 0 10px 0;
+}
+
+
+
+
+
+
+
+/*
+***
+  归档部分美化
+**
+*/
+
+// 改变归档竖线彩带效果
+.posts-collapse::before {
+  background: linear-gradient(180deg,#f79533 0,#f37055 15%,#ef4e7b 30%,#a166ab 44%,#5073b8 58%,#1098ad 72%,#07b39b 86%,#6dba82 100%);
+  opacity: 0.3
+}
+
+.page-archive .posts-collapse .archive-move-on{
+  background-color: #fc6423;
+}
+
+// 改变归档彩球颜色
+.posts-collapse .collection-title::before{
+  background-color: #fc6423;
+}
+.posts-collapse .collection-year::before{
+  background-color: blueviolet
+}
+.posts-collapse .post-header::before {
+  background-color: gray;
+  opacity: 0;
+}
+
+
+// 改变归档日期颜色以及发布内容部分
+.posts-collapse .post-meta {
+  color: #5073b8;
+  font-weight: 900;
+}
+.posts-collapse .post-title {
+  margin-left: 5px;
+}
+
+// 设置归档方框美化
+.posts-collapse .post-header {
+  position: relative;
+  box-shadow: 0 1px 3px #6f42c100, 0 0px 6px #6f42c1;
+  padding: 2px 10px;
+  margin: 8px;
+  border-bottom: none;
+  border-radius: 10px;
+  width: 85%;
+}
+.posts-collapse .post-header:hover{
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+  transition-property: inherit;
+  box-shadow: 0 1px 3px #6f42c100, 0 0px 17px 2px #6f42c1;
+}
+
+
+
+
+
+
+
+// 美化标签底部选择按钮(1.2.3.4.5)颜色
+.pagination .page-number.current {
+  background: #a166ab;
+  border-radius: 20px 20px 20px 20px;
+}
+.pagination .prev, .pagination .next, .pagination .page-number {
+  color: blueviolet;
+  font-weight: 500;
+  border-radius: 30px 30px 30px 30px;
+}
+
+
+//// 顶部进度条的隐藏代码
+//.headband {
+//  height: 0px;
+//  background: #fc6423;
+//}
+
+
+// 标签的美化,使用圆形方框美化
+.tag-cloud a {
+  box-shadow: 0 1px 3px #6f42c1, 0 1px 2px #d9534f;
+  padding: 2px 10px;
+  margin: 8px;
+  background: #c1425c00;
+  border-bottom: none;
+  border-radius: 20px;
+}
+
+
+// 修改代码块mac-panel上方颜色
+.highlight-container{
+  background: #7fb8ee
+}
+
+
+
+/*
+***
+  滚动条美化
+**
+*/
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+::-webkit-scrollbar-button:start:increment,::-webkit-scrollbar-button:end:decrement {
+  display: none;
+}
+::-webkit-scrollbar-corner {
+  display: block;
+}
+::-webkit-scrollbar-thumb {
+  // border-radius: 8px;
+  background-color: rgba(0,0,0,.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  // border-radius: 8px;
+  background-color: rgba(127,184,238,.5);
+}
+::-webkit-scrollbar-track,::-webkit-scrollbar-thumb {
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
+}
+//::-webkit-scrollbar-track:hover {    // 按住滚动条时悬浮的样式
+//  background-color: rgba(0,0,0,.15);
+//}
+::-webkit-scrollbar-button:start {
+  width: 10px;
+  height: 10px;
+  /*background: url(../images/scrollbar_arrow.png) no-repeat 0 0;*/  /*可以添加滚动条样式*/
+}
+
+
+  
